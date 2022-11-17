@@ -1,5 +1,5 @@
 /// 环形队列结构
-struct CircleQueue {
+pub struct CircleQueue {
     // 队列最大长度
     max_size: usize,
     // 队列头部
@@ -21,18 +21,18 @@ impl CircleQueue {
     }
 
     /// 判断队列是否为空
-    pub fn is_empty(&self) -> bool {
+    fn is_empty(&self) -> bool {
         // 当队首和队尾后一个元素相等时队列为空
         self.front == self.rear
     }
 
     /// 判断队列是否满
-    pub fn is_full(&self) -> bool {
+   fn is_full(&self) -> bool {
         (self.rear + 1) % self.max_size == self.front
     }
 
     /// 添加一个元素到队列
-    fn add_one(&mut self, num: usize) {
+    pub fn add_one(&mut self, num: usize) {
         if self.is_full() {
             println!("队列已满，无法增加元素！");
         } else {
@@ -43,7 +43,7 @@ impl CircleQueue {
         }
     }
     /// 获取队列的数据，出队列
-    fn get_one(&mut self) -> Option<usize> {
+    pub fn get_one(&mut self) -> Option<usize> {
         if self.is_empty() {
             println!("队列为空！");
             None
@@ -60,18 +60,21 @@ impl CircleQueue {
         }
     }
     /// 显示队列的所有数据
-    fn show_queue(&self) {
+    pub fn show_queue(&self) {
         if self.is_empty() {
             println!("队列为空！");
         } else {
-            let mut i = self.front;
+            let  mut i = self.front;
+            let mut j = 1;
             while i < self.front + self.actual_size() {
-                println!("队列第 {n} 个是 {v}", n = i + 1, v = self.queue_vec[i]);
+                println!("队列第 {n} 个是 {v}", n = j, v = self.queue_vec[i]);
+                j += 1;
+                i += 1;
             }
         }
     }
     /// 显示队尾元素
-    fn get_ender(&self) -> Option<usize> {
+    pub fn get_ender(&self) -> Option<usize> {
         if self.is_empty() {
             None
         } else {
@@ -80,7 +83,7 @@ impl CircleQueue {
     }
 
     /// 显示队首元素，注意：不是取数据
-    fn get_header(&self) -> Option<usize> {
+    pub fn get_header(&self) -> Option<usize> {
         if self.is_empty() {
             None
         } else {
@@ -88,7 +91,7 @@ impl CircleQueue {
         }
     }
     /// 求出当前队列有效数据的个数
-    fn actual_size(&self) -> usize {
+    pub fn actual_size(&self) -> usize {
         (self.rear + self.max_size - self.front) % self.max_size
     }
 }
