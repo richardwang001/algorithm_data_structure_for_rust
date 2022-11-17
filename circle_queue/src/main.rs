@@ -19,6 +19,7 @@ fn main() {
     }
 
     let mut queue = CircleQueue::new(max_size);
+    let mut action = "";
 
     loop {
         println!("请输入操作：");
@@ -34,7 +35,7 @@ fn main() {
         // 只读取第一行！！！
         let action_string = stdin1.lock().lines().next().unwrap().unwrap();
 
-        let action = action_string.trim();
+         action = action_string.trim();
         match action {
             "add" => {
                 println!("请输入要加入队列最后的数字：");
